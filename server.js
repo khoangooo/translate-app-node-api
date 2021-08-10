@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import notesRouter from "./app/routes/notes.route.js";
-import db from "./app/models/index.js"
+import db from "./app/models/index.js";
 
 const app = express();
 
@@ -19,6 +19,11 @@ app.use(express.urlencoded({ extended: true }));
 
 //use routes
 app.use("/api/v1/notes", notesRouter);
+
+//use routes
+app.get("/", (req, res) => {
+  res.send({ message: "Hey, who are" });
+});
 
 // set port, listen for requests
 const PORT = process.env.PORT || 5000;
