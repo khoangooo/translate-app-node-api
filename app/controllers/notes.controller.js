@@ -27,7 +27,7 @@ const fetchmany = (req, res) => {
     })
     .catch((err) => {
       res.status(500).send({
-				status: false,
+        status: false,
         message: err.message || "Lất thông tin không thành công",
       });
     });
@@ -35,7 +35,7 @@ const fetchmany = (req, res) => {
 
 // Find a single Note with an id
 const fetchone = (req, res) => {
-  const {id} = req.params;
+  const { id } = req.params;
   Note.findByPk(id, { attributes: ["id", "sfld", "translate"] })
     .then((data) => {
       res.send({
@@ -47,7 +47,7 @@ const fetchone = (req, res) => {
     .catch((err) => {
       console.log(err);
       res.status(500).send({
-				status: false,
+        status: false,
         message: "Error retrieving Note with id=" + id,
       });
     });
@@ -55,28 +55,33 @@ const fetchone = (req, res) => {
 
 // Update a Note by the id in the request
 const update = (req, res) => {
-  const {id} = req.params;
+  const { id } = req.params;
 
-  Note.update(req.body, {
-    where: { id },
-  })
+  Note.update(
+    {
+      translate: req.body.translate,
+    },
+    {
+      where: { id },
+    }
+  )
     .then((num) => {
       if (num == 1) {
         res.send({
-					status: true,
+          status: true,
           message: "Cập nhật thành công.",
         });
       } else {
         res.send({
-					status: false,
+          status: false,
           message: `Cập nhật thất bại. Vui lòng kiểm tra lại`,
         });
       }
     })
     .catch((err) => {
-			console.log(err)
+      console.log(err);
       res.status(500).send({
-				status: false,
+        status: false,
         message: "Error updating Note with id=" + id,
       });
     });
