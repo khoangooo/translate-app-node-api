@@ -11,17 +11,21 @@ const fetchmany = (req, res) => {
     offset,
     limit,
     attributes: ["id", "sfld", "translate"],
+    order: [["id", "ASC"]],
   })
-    .then((data) => {
+    .then(({ rows, count }) => {
+      const data = rows.map((item) => {
+        return { ...item.dataValues, id: +item.dataValues.id };
+      });
       const pagination = {
-        total: data.count,
+        total: count,
         per_page: limit,
         page_number,
       };
       res.send({
         status: true,
         message: `Lấy thông tin thành công`,
-        data: data.rows,
+        data,
         pagination,
       });
     })
@@ -56,7 +60,6 @@ const fetchone = (req, res) => {
 // Update a Note by the id in the request
 const update = (req, res) => {
   const { id } = req.params;
-
   Note.update(
     {
       translate: req.body.translate,
