@@ -10,7 +10,7 @@ const fetchmany = (req, res) => {
   Note.findAndCountAll({
     offset,
     limit,
-    attributes: ["id", "sfld", "translate"],
+    attributes: ["id", "flds", "translate"],
     order: [["id", "ASC"]],
   })
     .then(({ rows, count }) => {
@@ -36,11 +36,11 @@ const fetchmany = (req, res) => {
       });
     });
 };
-
+// sfld
 // Find a single Note with an id
 const fetchone = (req, res) => {
   const { id } = req.params;
-  Note.findByPk(id, { attributes: ["id", "sfld", "translate"] })
+  Note.findByPk(id, { attributes: ["id", "flds", "translate"] })
     .then((data) => {
       res.send({
         status: true,
