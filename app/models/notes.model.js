@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 
 const NotesModel = (sequelize) => {
   const Note = sequelize.define(
-    "note",
+    "france_vocabulary",
     {
       id: {
         type: Sequelize.BIGINT,

@@ -7,6 +7,10 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
   dialect: dbConfig.dialect,
   dialectOptions: dbConfig.dialectOptions,
   operatorsAliases: "0",
+  // define: {
+  //   charset: dbConfig.CHARSET,
+  //   collate: dbConfig.COLLATION, 
+  // },
   pool: {
     max: dbConfig.pool.max,
     min: dbConfig.pool.min,

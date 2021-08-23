@@ -7,7 +7,7 @@ const app = express();
 
 db.sequelize.sync().then(() => {
   console.log("Database is connected !!!");
-});
+}).catch(err => console.log(err));
 
 app.use(cors());
 
@@ -22,7 +22,7 @@ app.use("/api/v1/notes", notesRouter);
 
 //use routes
 app.get("/", (req, res) => {
-  res.send({ message: "Hey, who are" });
+  res.send({ message: "Hey, who are you" });
 });
 
 // set port, listen for requests
